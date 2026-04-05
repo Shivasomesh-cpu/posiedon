@@ -1,20 +1,24 @@
 <template>
   <div class="language-switcher" ref="switcherRef">
     <button class="switcher-trigger" @click="toggleDropdown">
+      <span class="lang-icon">🌐</span>
       {{ currentLabel }}
       <span class="caret">{{ open ? '▲' : '▼' }}</span>
     </button>
-    <ul v-if="open" class="switcher-dropdown">
-      <li
-        v-for="loc in availableLocales"
-        :key="loc.key"
-        class="switcher-option"
-        :class="{ active: loc.key === locale }"
-        @click="switchLocale(loc.key)"
-      >
-        {{ loc.label }}
-      </li>
-    </ul>
+    <transition name="dropdown">
+      <ul v-if="open" class="switcher-dropdown">
+        <li
+          v-for="loc in availableLocales"
+          :key="loc.key"
+          class="switcher-option"
+          :class="{ active: loc.key === locale }"
+          @click="switchLocale(loc.key)"
+        >
+          <span class="option-check" v-if="loc.key === locale">✓</span>
+          {{ loc.label }}
+        </li>
+      </ul>
+    </transition>
   </div>
 </template>
 
@@ -63,62 +67,92 @@ onUnmounted(() => {
 .language-switcher {
   position: relative;
   display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--mf-font-mono);
 }
 
-/* Light theme (default - for white header backgrounds) */
 .switcher-trigger {
-  background: transparent;
-  color: #333;
-  border: 1px solid #CCC;
-  padding: 4px 12px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
+  background: var(--mf-surface-glass);
+  color: var(--mf-text-secondary);
+  border: 1px solid var(--mf-border-subtle);
+  padding: var(--mf-space-2) var(--mf-space-3);
+  font-family: var(--mf-font-mono);
+  font-size: var(--mf-text-sm);
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 6px;
-  transition: border-color 0.2s, opacity 0.2s;
+  gap: var(--mf-space-2);
+  border-radius: var(--mf-radius-md);
+  transition: all var(--mf-transition-fast);
 }
 
 .switcher-trigger:hover {
-  border-color: #999;
+  background: var(--mf-surface-glass-hover);
+  border-color: var(--mf-border-default);
+  color: var(--mf-text-primary);
+}
+
+.lang-icon {
+  font-size: 1rem;
 }
 
 .caret {
-  font-size: 0.6rem;
+  font-size: 0.5rem;
+  opacity: 0.6;
 }
 
 .switcher-dropdown {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 4px);
   right: 0;
-  margin-top: 4px;
-  background: #FFFFFF;
-  border: 1px solid #DDD;
+  background: var(--mf-bg-elevated);
+  border: 1px solid var(--mf-border-default);
+  border-radius: var(--mf-radius-md);
   list-style: none;
-  padding: 4px 0;
-  min-width: 100%;
-  z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: var(--mf-space-2);
+  min-width: 120px;
+  z-index: var(--mf-z-dropdown);
+  box-shadow: var(--mf-shadow-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .switcher-option {
-  padding: 6px 12px;
-  font-size: 0.8rem;
-  color: #333;
+  padding: var(--mf-space-2) var(--mf-space-3);
+  font-size: var(--mf-text-sm);
+  color: var(--mf-text-secondary);
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.15s;
+  border-radius: var(--mf-radius-sm);
+  transition: all var(--mf-transition-fast);
+  display: flex;
+  align-items: center;
+  gap: var(--mf-space-2);
 }
 
 .switcher-option:hover {
-  background: #F0F0F0;
+  background: var(--mf-surface-glass-hover);
+  color: var(--mf-text-primary);
 }
 
 .switcher-option.active {
-  color: var(--orange, #FF4500);
+  color: var(--mf-accent-primary);
+  background: var(--mf-accent-dim);
 }
 
+.option-check {
+  color: var(--mf-accent-primary);
+  font-size: 0.8rem;
+}
 
+/* Dropdown Animation */
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 0.2s ease;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
 </style>

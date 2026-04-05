@@ -1,0 +1,474 @@
+/**
+ * MiroFish Design System - Obsidian Theme
+ * A stunning dark theme with glass morphism and glowing accents
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+
+:root {
+  /* Background Colors */
+  --mf-bg-primary: #0a0a0f;
+  --mf-bg-secondary: #12121a;
+  --mf-bg-tertiary: #1a1a24;
+  --mf-bg-elevated: #222230;
+  --mf-bg-hover: #2a2a3a;
+  
+  /* Surface Colors (Glass) */
+  --mf-surface-glass: rgba(255, 255, 255, 0.03);
+  --mf-surface-glass-hover: rgba(255, 255, 255, 0.06);
+  --mf-surface-glass-active: rgba(255, 255, 255, 0.08);
+  
+  /* Border Colors */
+  --mf-border-subtle: rgba(255, 255, 255, 0.06);
+  --mf-border-default: rgba(255, 255, 255, 0.1);
+  --mf-border-strong: rgba(255, 255, 255, 0.15);
+  --mf-border-accent: rgba(139, 92, 246, 0.5);
+  
+  /* Text Colors */
+  --mf-text-primary: #f0f0f5;
+  --mf-text-secondary: #a0a0b0;
+  --mf-text-tertiary: #6b6b7b;
+  --mf-text-inverse: #0a0a0f;
+  
+  /* Accent Colors - Purple Spectrum */
+  --mf-accent-primary: #8b5cf6;
+  --mf-accent-secondary: #a78bfa;
+  --mf-accent-tertiary: #c4b5fd;
+  --mf-accent-dim: rgba(139, 92, 246, 0.15);
+  
+  /* Accent Glow */
+  --mf-glow-accent: 0 0 20px rgba(139, 92, 246, 0.4);
+  --mf-glow-accent-strong: 0 0 40px rgba(139, 92, 246, 0.6);
+  --mf-glow-accent-subtle: 0 0 10px rgba(139, 92, 246, 0.2);
+  
+  /* Additional Colors */
+  --mf-cyan: #22d3ee;
+  --mf-pink: #ec4899;
+  --mf-orange: #f97316;
+  --mf-green: #10b981;
+  --mf-red: #ef4444;
+  --mf-yellow: #eab308;
+  
+  /* Gradients */
+  --mf-gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 50%, #ec4899 100%);
+  --mf-gradient-accent: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+  --mf-gradient-surface: linear-gradient(180deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%);
+  --mf-gradient-glow: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+  --mf-gradient-mesh: 
+    radial-gradient(at 40% 20%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, rgba(236, 72, 153, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, rgba(34, 211, 238, 0.08) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
+  
+  /* Typography */
+  --mf-font-sans: 'Inter', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+  --mf-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --mf-font-display: 'Space Grotesk', 'Inter', sans-serif;
+  
+  /* Font Sizes */
+  --mf-text-xs: 0.75rem;
+  --mf-text-sm: 0.875rem;
+  --mf-text-base: 1rem;
+  --mf-text-lg: 1.125rem;
+  --mf-text-xl: 1.25rem;
+  --mf-text-2xl: 1.5rem;
+  --mf-text-3xl: 1.875rem;
+  --mf-text-4xl: 2.25rem;
+  --mf-text-5xl: 3rem;
+  --mf-text-6xl: 3.75rem;
+  --mf-text-7xl: 4.5rem;
+  
+  /* Font Weights */
+  --mf-font-light: 300;
+  --mf-font-normal: 400;
+  --mf-font-medium: 500;
+  --mf-font-semibold: 600;
+  --mf-font-bold: 700;
+  --mf-font-extrabold: 800;
+  
+  /* Spacing */
+  --mf-space-1: 0.25rem;
+  --mf-space-2: 0.5rem;
+  --mf-space-3: 0.75rem;
+  --mf-space-4: 1rem;
+  --mf-space-5: 1.25rem;
+  --mf-space-6: 1.5rem;
+  --mf-space-8: 2rem;
+  --mf-space-10: 2.5rem;
+  --mf-space-12: 3rem;
+  --mf-space-16: 4rem;
+  --mf-space-20: 5rem;
+  --mf-space-24: 6rem;
+  
+  /* Border Radius */
+  --mf-radius-sm: 4px;
+  --mf-radius-md: 8px;
+  --mf-radius-lg: 12px;
+  --mf-radius-xl: 16px;
+  --mf-radius-2xl: 24px;
+  --mf-radius-full: 9999px;
+  
+  /* Shadows */
+  --mf-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --mf-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --mf-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --mf-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.6);
+  --mf-shadow-glow: 0 0 30px rgba(139, 92, 246, 0.3);
+  --mf-shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  
+  /* Transitions */
+  --mf-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --mf-transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --mf-transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --mf-transition-bounce: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  /* Z-Index Scale */
+  --mf-z-dropdown: 1000;
+  --mf-z-sticky: 1020;
+  --mf-z-fixed: 1030;
+  --mf-z-modal-backdrop: 1040;
+  --mf-z-modal: 1050;
+  --mf-z-popover: 1060;
+  --mf-z-tooltip: 1070;
+}
+
+/* ============================================
+   Light Theme Override
+   ============================================ */
+[data-theme="light"] {
+  --mf-bg-primary: #fafafa;
+  --mf-bg-secondary: #f5f5f5;
+  --mf-bg-tertiary: #ebebeb;
+  --mf-bg-elevated: #ffffff;
+  --mf-bg-hover: #e5e5e5;
+  
+  --mf-surface-glass: rgba(0, 0, 0, 0.02);
+  --mf-surface-glass-hover: rgba(0, 0, 0, 0.04);
+  
+  --mf-border-subtle: rgba(0, 0, 0, 0.06);
+  --mf-border-default: rgba(0, 0, 0, 0.1);
+  --mf-border-strong: rgba(0, 0, 0, 0.15);
+  
+  --mf-text-primary: #1a1a1a;
+  --mf-text-secondary: #525252;
+  --mf-text-tertiary: #8a8a8a;
+  --mf-text-inverse: #ffffff;
+}
+
+/* ============================================
+   Base Reset & Defaults
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--mf-font-sans);
+  background: var(--mf-bg-primary);
+  color: var(--mf-text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ============================================
+   Scrollbar Styling
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--mf-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mf-border-strong);
+  border-radius: var(--mf-radius-full);
+  transition: background var(--mf-transition-fast);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mf-accent-primary);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--mf-border-strong) var(--mf-bg-secondary);
+}
+
+/* ============================================
+   Selection & Focus
+   ============================================ */
+
+::selection {
+  background: var(--mf-accent-primary);
+  color: var(--mf-text-inverse);
+}
+
+:focus-visible {
+  outline: 2px solid var(--mf-accent-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Link Styling
+   ============================================ */
+
+a {
+  color: var(--mf-accent-secondary);
+  text-decoration: none;
+  transition: color var(--mf-transition-fast);
+}
+
+a:hover {
+  color: var(--mf-accent-primary);
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.glass {
+  background: var(--mf-surface-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--mf-border-subtle);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--mf-border-default);
+}
+
+.glow {
+  box-shadow: var(--mf-glow-accent);
+}
+
+.glow-hover:hover {
+  box-shadow: var(--mf-glow-accent);
+}
+
+.text-gradient {
+  background: var(--mf-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-accent {
+  background: var(--mf-gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, var(--mf-bg-tertiary) 0%, var(--mf-bg-elevated) 50%, var(--mf-bg-tertiary) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.float { animation: float 3s ease-in-out infinite; }
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); }
+  50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6); }
+}
+
+.glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in { animation: fadeIn 0.5s ease-out forwards; }
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in-up { animation: slideInUp 0.5s ease-out forwards; }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink { animation: blink 1s step-end infinite; }
+
+/* ============================================
+   Component Base Styles
+   ============================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mf-space-2);
+  padding: var(--mf-space-3) var(--mf-space-6);
+  font-family: var(--mf-font-sans);
+  font-size: var(--mf-text-sm);
+  font-weight: var(--mf-font-semibold);
+  border-radius: var(--mf-radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all var(--mf-transition-fast);
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--mf-gradient-primary);
+  color: white;
+  box-shadow: var(--mf-glow-accent-subtle);
+}
+
+.btn-primary:hover:not(:disabled) {
+  box-shadow: var(--mf-glow-accent);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--mf-surface-glass);
+  color: var(--mf-text-primary);
+  border: 1px solid var(--mf-border-default);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--mf-surface-glass-hover);
+  border-color: var(--mf-accent-primary);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--mf-text-secondary);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--mf-surface-glass);
+  color: var(--mf-text-primary);
+}
+
+.input {
+  width: 100%;
+  padding: var(--mf-space-3) var(--mf-space-4);
+  font-family: var(--mf-font-sans);
+  font-size: var(--mf-text-base);
+  color: var(--mf-text-primary);
+  background: var(--mf-bg-tertiary);
+  border: 1px solid var(--mf-border-default);
+  border-radius: var(--mf-radius-md);
+  transition: all var(--mf-transition-fast);
+}
+
+.input::placeholder {
+  color: var(--mf-text-tertiary);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--mf-accent-primary);
+  box-shadow: 0 0 0 3px var(--mf-accent-dim);
+}
+
+.card {
+  background: var(--mf-bg-secondary);
+  border: 1px solid var(--mf-border-subtle);
+  border-radius: var(--mf-radius-lg);
+  padding: var(--mf-space-6);
+  transition: all var(--mf-transition-fast);
+}
+
+.card:hover {
+  border-color: var(--mf-border-default);
+}
+
+.card-glass {
+  background: var(--mf-surface-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--mf-space-1) var(--mf-space-3);
+  font-family: var(--mf-font-mono);
+  font-size: var(--mf-text-xs);
+  font-weight: var(--mf-font-semibold);
+  border-radius: var(--mf-radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-primary {
+  background: var(--mf-accent-dim);
+  color: var(--mf-accent-secondary);
+}
+
+.badge-success {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--mf-green);
+}
+
+.badge-warning {
+  background: rgba(234, 179, 8, 0.15);
+  color: var(--mf-yellow);
+}
+
+.badge-error {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--mf-red);
+}
+
+.divider {
+  height: 1px;
+  background: var(--mf-border-subtle);
+  margin: var(--mf-space-6) 0;
+}

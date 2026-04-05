@@ -704,19 +704,19 @@ onUnmounted(() => {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: #FFFFFF;
+  background: var(--mf-bg-primary, #0a0a0f);
   font-family: 'Space Grotesk', 'Noto Sans SC', system-ui, sans-serif;
   overflow: hidden;
 }
 
 /* --- Control Bar --- */
 .control-bar {
-  background: #FFF;
+  background: var(--mf-bg-secondary, #12121a);
   padding: 12px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid var(--mf-border, rgba(139, 92, 246, 0.2));
   z-index: 10;
   height: 64px;
 }
@@ -732,9 +732,9 @@ onUnmounted(() => {
   flex-direction: column;
   gap: 4px;
   padding: 6px 12px;
-  border-radius: 4px;
-  background: #FAFAFA;
-  border: 1px solid #EAEAEA;
+  border-radius: 8px;
+  background: var(--mf-bg-tertiary, #1a1a2e);
+  border: 1px solid var(--mf-border, rgba(139, 92, 246, 0.15));
   opacity: 0.7;
   transition: all 0.3s;
   min-width: 140px;
@@ -744,14 +744,15 @@ onUnmounted(() => {
 
 .platform-status.active {
   opacity: 1;
-  border-color: #333;
-  background: #FFF;
+  border-color: var(--mf-accent, #8b5cf6);
+  background: rgba(139, 92, 246, 0.1);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
 }
 
 .platform-status.completed {
   opacity: 1;
-  border-color: #1A936F;
-  background: #F2FAF6;
+  border-color: var(--mf-success, #10b981);
+  background: rgba(16, 185, 129, 0.1);
 }
 
 /* Actions Tooltip */
@@ -762,10 +763,11 @@ onUnmounted(() => {
   transform: translateX(-50%);
   margin-top: 8px;
   padding: 10px 14px;
-  background: #000;
-  color: #FFF;
-  border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: var(--mf-bg-secondary, #12121a);
+  color: var(--mf-text-primary, #f1f5f9);
+  border-radius: 8px;
+  border: 1px solid var(--mf-border, rgba(139, 92, 246, 0.3));
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   opacity: 0;
   visibility: hidden;
   transition: all 0.2s ease;
@@ -782,7 +784,7 @@ onUnmounted(() => {
   transform: translateX(-50%);
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-bottom: 6px solid #000;
+  border-bottom: 6px solid var(--mf-bg-secondary, #12121a);
 }
 
 .platform-status:hover .actions-tooltip {
@@ -793,7 +795,7 @@ onUnmounted(() => {
 .tooltip-title {
   font-size: 10px;
   font-weight: 600;
-  color: #999;
+  color: var(--mf-text-muted, #6b7280);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 8px;
@@ -809,9 +811,9 @@ onUnmounted(() => {
   font-size: 10px;
   font-weight: 600;
   padding: 3px 8px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 2px;
-  color: #FFF;
+  background: rgba(139, 92, 246, 0.2);
+  border-radius: 4px;
+  color: var(--mf-accent, #8b5cf6);
   letter-spacing: 0.03em;
 }
 
@@ -825,13 +827,13 @@ onUnmounted(() => {
 .platform-name {
   font-size: 11px;
   font-weight: 700;
-  color: #000;
+  color: var(--mf-text-primary, #f1f5f9);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
-.platform-status.twitter .platform-icon { color: #000; }
-.platform-status.reddit .platform-icon { color: #000; }
+.platform-status.twitter .platform-icon { color: var(--mf-accent, #8b5cf6); }
+.platform-status.reddit .platform-icon { color: #ec4899; }
 
 .platform-stats {
   display: flex;
@@ -846,7 +848,7 @@ onUnmounted(() => {
 
 .stat-label {
   font-size: 8px;
-  color: #999;
+  color: var(--mf-text-muted, #6b7280);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -855,18 +857,18 @@ onUnmounted(() => {
 .stat-value {
   font-size: 11px;
   font-weight: 600;
-  color: #333;
+  color: var(--mf-text-primary, #f1f5f9);
 }
 
 .stat-total, .stat-unit {
   font-size: 9px;
-  color: #999;
+  color: var(--mf-text-muted, #6b7280);
   font-weight: 400;
 }
 
 .status-badge {
   margin-left: auto;
-  color: #1A936F;
+  color: var(--mf-success, #10b981);
   display: flex;
   align-items: center;
 }
@@ -880,25 +882,27 @@ onUnmounted(() => {
   font-size: 13px;
   font-weight: 600;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .action-btn.primary {
-  background: #000;
-  color: #FFF;
+  background: linear-gradient(135deg, var(--mf-accent, #8b5cf6), #ec4899);
+  color: white;
 }
 
 .action-btn.primary:hover:not(:disabled) {
-  background: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
 }
 
 .action-btn:disabled {
   opacity: 0.3;
   cursor: not-allowed;
+  transform: none;
 }
 
 /* --- Main Content Area --- */
@@ -906,17 +910,17 @@ onUnmounted(() => {
   flex: 1;
   overflow-y: auto;
   position: relative;
-  background: #FFF;
+  background: var(--mf-bg-primary, #0a0a0f);
 }
 
 /* Timeline Header */
 .timeline-header {
   position: sticky;
   top: 0;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(8px);
+  background: rgba(10, 10, 15, 0.9);
+  backdrop-filter: blur(12px);
   padding: 12px 24px;
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid var(--mf-border, rgba(139, 92, 246, 0.15));
   z-index: 5;
   display: flex;
   justify-content: center;
@@ -927,15 +931,16 @@ onUnmounted(() => {
   align-items: center;
   gap: 16px;
   font-size: 11px;
-  color: #666;
-  background: #F5F5F5;
+  color: var(--mf-text-secondary, #94a3b8);
+  background: var(--mf-bg-tertiary, #1a1a2e);
   padding: 4px 12px;
   border-radius: 20px;
+  border: 1px solid var(--mf-border, rgba(139, 92, 246, 0.15));
 }
 
 .total-count {
   font-weight: 600;
-  color: #333;
+  color: var(--mf-text-primary, #f1f5f9);
 }
 
 .platform-breakdown {
@@ -950,9 +955,9 @@ onUnmounted(() => {
   gap: 4px;
 }
 
-.breakdown-divider { color: #DDD; }
-.breakdown-item.twitter { color: #000; }
-.breakdown-item.reddit { color: #000; }
+.breakdown-divider { color: var(--mf-border, rgba(139, 92, 246, 0.3)); }
+.breakdown-item.twitter { color: var(--mf-accent, #8b5cf6); }
+.breakdown-item.reddit { color: #ec4899; }
 
 /* --- Timeline Feed --- */
 .timeline-feed {
@@ -969,7 +974,8 @@ onUnmounted(() => {
   top: 0;
   bottom: 0;
   width: 1px;
-  background: #EAEAEA; /* Cleaner line */
+  background: linear-gradient(180deg, var(--mf-accent, #8b5cf6), #ec4899);
+  opacity: 0.3;
   transform: translateX(-50%);
 }
 
@@ -987,8 +993,8 @@ onUnmounted(() => {
   top: 24px;
   width: 10px;
   height: 10px;
-  background: #FFF;
-  border: 1px solid #CCC;
+  background: var(--mf-bg-secondary, #12121a);
+  border: 1px solid var(--mf-border, rgba(139, 92, 246, 0.5));
   border-radius: 50%;
   transform: translateX(-50%);
   z-index: 2;
@@ -1000,30 +1006,31 @@ onUnmounted(() => {
 .marker-dot {
   width: 4px;
   height: 4px;
-  background: #CCC;
+  background: var(--mf-text-muted, #6b7280);
   border-radius: 50%;
 }
 
-.timeline-item.twitter .marker-dot { background: #000; }
-.timeline-item.reddit .marker-dot { background: #000; }
-.timeline-item.twitter .timeline-marker { border-color: #000; }
-.timeline-item.reddit .timeline-marker { border-color: #000; }
+.timeline-item.twitter .marker-dot { background: var(--mf-accent, #8b5cf6); }
+.timeline-item.reddit .marker-dot { background: #ec4899; }
+.timeline-item.twitter .timeline-marker { border-color: var(--mf-accent, #8b5cf6); }
+.timeline-item.reddit .timeline-marker { border-color: #ec4899; }
 
 /* Card Layout */
 .timeline-card {
   width: calc(100% - 48px);
-  background: #FFF;
-  border-radius: 2px;
+  background: var(--mf-bg-secondary, #12121a);
+  border-radius: 10px;
   padding: 16px 20px;
-  border: 1px solid #EAEAEA;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+  border: 1px solid var(--mf-border, rgba(139, 92, 246, 0.15));
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   position: relative;
   transition: all 0.2s;
 }
 
 .timeline-card:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  border-color: #DDD;
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.15);
+  border-color: var(--mf-accent, #8b5cf6);
+  transform: translateY(-2px);
 }
 
 /* Left side (Twitter) */
@@ -1033,7 +1040,7 @@ onUnmounted(() => {
 }
 .timeline-item.twitter .timeline-card {
   margin-left: auto;
-  margin-right: 32px; /* Gap from axis */
+  margin-right: 32px;
 }
 
 /* Right side (Reddit) */
@@ -1043,7 +1050,7 @@ onUnmounted(() => {
 }
 .timeline-item.reddit .timeline-card {
   margin-right: auto;
-  margin-left: 32px; /* Gap from axis */
+  margin-left: 32px;
 }
 
 /* Card Content Styles */
@@ -1053,7 +1060,7 @@ onUnmounted(() => {
   align-items: flex-start;
   margin-bottom: 12px;
   padding-bottom: 12px;
-  border-bottom: 1px solid #F5F5F5;
+  border-bottom: 1px solid var(--mf-border, rgba(139, 92, 246, 0.1));
 }
 
 .agent-info {
@@ -1065,8 +1072,8 @@ onUnmounted(() => {
 .avatar-placeholder {
   width: 24px;
   height: 24px;
-  background: #000;
-  color: #FFF;
+  background: linear-gradient(135deg, var(--mf-accent, #8b5cf6), #ec4899);
+  color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1079,7 +1086,7 @@ onUnmounted(() => {
 .agent-name {
   font-size: 13px;
   font-weight: 600;
-  color: #000;
+  color: var(--mf-text-primary, #f1f5f9);
 }
 
 .header-meta {
@@ -1089,7 +1096,7 @@ onUnmounted(() => {
 }
 
 .platform-indicator {
-  color: #999;
+  color: var(--mf-text-muted, #6b7280);
   display: flex;
   align-items: center;
 }
@@ -1097,7 +1104,7 @@ onUnmounted(() => {
 .action-badge {
   font-size: 9px;
   padding: 2px 6px;
-  border-radius: 2px;
+  border-radius: 4px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1105,33 +1112,33 @@ onUnmounted(() => {
 }
 
 /* Monochromatic Badges */
-.badge-post { background: #F0F0F0; color: #333; border-color: #E0E0E0; }
-.badge-comment { background: #F0F0F0; color: #666; border-color: #E0E0E0; }
-.badge-action { background: #FFF; color: #666; border: 1px solid #E0E0E0; }
-.badge-meta { background: #FAFAFA; color: #999; border: 1px dashed #DDD; }
+.badge-post { background: rgba(139, 92, 246, 0.15); color: var(--mf-accent, #8b5cf6); border-color: rgba(139, 92, 246, 0.3); }
+.badge-comment { background: rgba(99, 102, 241, 0.15); color: #818cf8; border-color: rgba(99, 102, 241, 0.3); }
+.badge-action { background: var(--mf-bg-tertiary, #1a1a2e); color: var(--mf-text-secondary, #94a3b8); border: 1px solid var(--mf-border, rgba(139, 92, 246, 0.2)); }
+.badge-meta { background: rgba(107, 114, 128, 0.15); color: var(--mf-text-muted, #6b7280); border: 1px dashed var(--mf-border, rgba(139, 92, 246, 0.2)); }
 .badge-idle { opacity: 0.5; }
 
 .content-text {
   font-size: 13px;
   line-height: 1.6;
-  color: #333;
+  color: var(--mf-text-secondary, #94a3b8);
   margin-bottom: 10px;
 }
 
 .content-text.main-text {
   font-size: 14px;
-  color: #000;
+  color: var(--mf-text-primary, #f1f5f9);
 }
 
 /* Info Blocks (Quote, Repost, etc) */
 .quoted-block, .repost-content {
-  background: #F9F9F9;
-  border: 1px solid #EEE;
+  background: var(--mf-bg-tertiary, #1a1a2e);
+  border: 1px solid var(--mf-border, rgba(139, 92, 246, 0.1));
   padding: 10px 12px;
-  border-radius: 2px;
+  border-radius: 6px;
   margin-top: 8px;
   font-size: 12px;
-  color: #555;
+  color: var(--mf-text-secondary, #94a3b8);
 }
 
 .quote-header, .repost-info, .like-info, .search-info, .follow-info, .vote-info, .idle-info, .comment-context {
@@ -1140,19 +1147,19 @@ onUnmounted(() => {
   gap: 6px;
   margin-bottom: 6px;
   font-size: 11px;
-  color: #666;
+  color: var(--mf-text-muted, #6b7280);
 }
 
 .icon-small {
-  color: #999;
+  color: var(--mf-text-muted, #6b7280);
 }
 .icon-small.filled {
-  color: #999; /* Keep icons neutral unless highlighted */
+  color: var(--mf-accent, #8b5cf6);
 }
 
 .search-query {
   font-family: 'JetBrains Mono', monospace;
-  background: #F0F0F0;
+  background: rgba(139, 92, 246, 0.1);
   padding: 0 4px;
   border-radius: 2px;
 }
@@ -1162,7 +1169,7 @@ onUnmounted(() => {
   display: flex;
   justify-content: flex-end;
   font-size: 10px;
-  color: #BBB;
+  color: var(--mf-text-muted, #6b7280);
   font-family: 'JetBrains Mono', monospace;
 }
 
@@ -1176,7 +1183,7 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  color: #CCC;
+  color: var(--mf-text-muted, #6b7280);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -1186,13 +1193,13 @@ onUnmounted(() => {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 1px solid #EAEAEA;
+  border: 1px solid var(--mf-accent, #8b5cf6);
   animation: ripple 2s infinite;
 }
 
 @keyframes ripple {
-  0% { transform: scale(0.8); opacity: 1; border-color: #CCC; }
-  100% { transform: scale(2.5); opacity: 0; border-color: #EAEAEA; }
+  0% { transform: scale(0.8); opacity: 1; border-color: var(--mf-accent, #8b5cf6); }
+  100% { transform: scale(2.5); opacity: 0; border-color: rgba(139, 92, 246, 0.1); }
 }
 
 /* Animation */
@@ -1212,22 +1219,22 @@ onUnmounted(() => {
 
 /* Logs */
 .system-logs {
-  background: #000;
-  color: #DDD;
+  background: var(--mf-bg-secondary, #12121a);
+  color: var(--mf-text-secondary, #94a3b8);
   padding: 16px;
   font-family: 'JetBrains Mono', monospace;
-  border-top: 1px solid #222;
+  border-top: 1px solid var(--mf-border, rgba(139, 92, 246, 0.2));
   flex-shrink: 0;
 }
 
 .log-header {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid var(--mf-border, rgba(139, 92, 246, 0.15));
   padding-bottom: 8px;
   margin-bottom: 8px;
   font-size: 10px;
-  color: #666;
+  color: var(--mf-text-muted, #6b7280);
 }
 
 .log-content {
@@ -1240,7 +1247,7 @@ onUnmounted(() => {
 }
 
 .log-content::-webkit-scrollbar { width: 4px; }
-.log-content::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+.log-content::-webkit-scrollbar-thumb { background: var(--mf-border, rgba(139, 92, 246, 0.3)); border-radius: 2px; }
 
 .log-line {
   font-size: 11px;
@@ -1249,8 +1256,8 @@ onUnmounted(() => {
   line-height: 1.5;
 }
 
-.log-time { color: #555; min-width: 75px; }
-.log-msg { color: #BBB; word-break: break-all; }
+.log-time { color: var(--mf-text-muted, #6b7280); min-width: 75px; }
+.log-msg { color: var(--mf-text-secondary, #94a3b8); word-break: break-all; }
 .mono { font-family: 'JetBrains Mono', monospace; }
 
 /* Loading spinner for button */
@@ -1263,5 +1270,9 @@ onUnmounted(() => {
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   margin-right: 6px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 </style>

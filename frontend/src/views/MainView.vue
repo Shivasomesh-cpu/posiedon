@@ -1,9 +1,12 @@
 <template>
   <div class="main-view">
     <!-- Header -->
-    <header class="app-header">
+    <header class="app-header glass">
       <div class="header-left">
-        <div class="brand" @click="router.push('/')">MIROFISH</div>
+        <div class="brand" @click="router.push('/')">
+          <span class="brand-icon">◆</span>
+          <span class="brand-text">MIROFISH</span>
+        </div>
       </div>
       
       <div class="header-center">
@@ -15,6 +18,7 @@
             :class="{ active: viewMode === mode }"
             @click="viewMode = mode"
           >
+            <span class="switch-icon">{{ { graph: '◇', split: '⬡', workbench: '▣' }[mode] }}</span>
             {{ { graph: $t('main.layoutGraph'), split: $t('main.layoutSplit'), workbench: $t('main.layoutWorkbench') }[mode] }}
           </button>
         </div>
@@ -414,20 +418,22 @@ onUnmounted(() => {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #FFF;
+  background: var(--mf-bg-primary);
   overflow: hidden;
-  font-family: 'Space Grotesk', 'Noto Sans SC', system-ui, sans-serif;
+  font-family: var(--mf-font-sans);
 }
 
 /* Header */
 .app-header {
-  height: 60px;
-  border-bottom: 1px solid #EAEAEA;
+  height: 64px;
+  border-bottom: 1px solid var(--mf-border-subtle);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
-  background: #FFF;
+  padding: 0 var(--mf-space-6);
+  background: var(--mf-surface-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   z-index: 100;
   position: relative;
 }
@@ -439,90 +445,133 @@ onUnmounted(() => {
 }
 
 .brand {
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 800;
-  font-size: 18px;
-  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: var(--mf-space-2);
   cursor: pointer;
+  transition: opacity var(--mf-transition-fast);
+}
+
+.brand:hover {
+  opacity: 0.8;
+}
+
+.brand-icon {
+  color: var(--mf-accent-primary);
+  font-size: 1.2rem;
+}
+
+.brand-text {
+  font-family: var(--mf-font-mono);
+  font-weight: var(--mf-font-extrabold);
+  font-size: var(--mf-text-lg);
+  letter-spacing: 2px;
+  color: var(--mf-text-primary);
 }
 
 .view-switcher {
   display: flex;
-  background: #F5F5F5;
+  background: var(--mf-bg-tertiary);
   padding: 4px;
-  border-radius: 6px;
+  border-radius: var(--mf-radius-lg);
   gap: 4px;
+  border: 1px solid var(--mf-border-subtle);
 }
 
 .switch-btn {
   border: none;
   background: transparent;
-  padding: 6px 16px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #666;
-  border-radius: 4px;
+  padding: var(--mf-space-2) var(--mf-space-4);
+  font-size: var(--mf-text-sm);
+  font-weight: var(--mf-font-medium);
+  color: var(--mf-text-tertiary);
+  border-radius: var(--mf-radius-md);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all var(--mf-transition-fast);
+  display: flex;
+  align-items: center;
+  gap: var(--mf-space-2);
+}
+
+.switch-btn:hover {
+  color: var(--mf-text-secondary);
 }
 
 .switch-btn.active {
-  background: #FFF;
-  color: #000;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  background: var(--mf-accent-dim);
+  color: var(--mf-accent-primary);
+}
+
+.switch-icon {
+  font-size: 0.9rem;
 }
 
 .status-indicator {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  color: #666;
-  font-weight: 500;
+  gap: var(--mf-space-2);
+  font-size: var(--mf-text-sm);
+  color: var(--mf-text-secondary);
+  font-weight: var(--mf-font-medium);
 }
 
 .header-right {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--mf-space-4);
 }
 
 .workflow-step {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
+  gap: var(--mf-space-2);
+  font-size: var(--mf-text-sm);
 }
 
 .step-num {
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
-  color: #999;
+  font-family: var(--mf-font-mono);
+  font-weight: var(--mf-font-bold);
+  color: var(--mf-text-tertiary);
 }
 
 .step-name {
-  font-weight: 700;
-  color: #000;
+  font-weight: var(--mf-font-semibold);
+  color: var(--mf-text-primary);
 }
 
 .step-divider {
   width: 1px;
-  height: 14px;
-  background-color: #E0E0E0;
+  height: 20px;
+  background-color: var(--mf-border-subtle);
 }
 
 .dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #CCC;
+  background: var(--mf-text-tertiary);
 }
 
-.status-indicator.processing .dot { background: #FF5722; animation: pulse 1s infinite; }
-.status-indicator.completed .dot { background: #4CAF50; }
-.status-indicator.error .dot { background: #F44336; }
+.status-indicator.processing .dot { 
+  background: var(--mf-orange); 
+  box-shadow: 0 0 8px var(--mf-orange);
+  animation: pulse 1.5s infinite; 
+}
 
-@keyframes pulse { 50% { opacity: 0.5; } }
+.status-indicator.completed .dot { 
+  background: var(--mf-green);
+  box-shadow: 0 0 8px var(--mf-green);
+}
+
+.status-indicator.error .dot { 
+  background: var(--mf-red);
+  box-shadow: 0 0 8px var(--mf-red);
+}
+
+@keyframes pulse { 
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; } 
+}
 
 /* Content */
 .content-area {
@@ -540,6 +589,6 @@ onUnmounted(() => {
 }
 
 .panel-wrapper.left {
-  border-right: 1px solid #EAEAEA;
+  border-right: 1px solid var(--mf-border-subtle);
 }
 </style>
